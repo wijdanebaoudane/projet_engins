@@ -1,7 +1,9 @@
 package com.example.demo.entities;
 
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 import jakarta.persistence.*;
@@ -12,7 +14,7 @@ import lombok.AllArgsConstructor;
 
 @Entity
 @Table(name = "demande")
-public class demande {
+public class Demande implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_demande")
@@ -20,6 +22,14 @@ public class demande {
     private Date date_sortie;
     private Integer shift;
     private  Boolean confirmation;
+    @ManyToOne()
+    private Utilisateur utilis;
+    @OneToMany(mappedBy = "demd",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Detail_demande> demandeList;
+    @OneToMany(mappedBy = "demd",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Affectations> affectationsList;
+
+
 
 
 }

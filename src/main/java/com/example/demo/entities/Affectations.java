@@ -1,7 +1,6 @@
 package com.example.demo.entities;
 
 import java.util.Date;
-import java.io.Serializable;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,13 +10,23 @@ import lombok.AllArgsConstructor;
 @Entity
 @Table(name = "affectations")
 
-public class affectations {
+public class Affectations {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_affectation")
-    private Long idAffectation;
+    @EmbeddedId
+    private Affectations_key id;
+    @ManyToOne
+    @MapsId("demandeId")
+    @JoinColumn(name="id_demande")
+    private Demande demd;
+    @ManyToOne
+    @MapsId("enginsId")
+    @JoinColumn(name="engins_id")
+    private Engins eng;
     private Date date_entree;
     private Date date_sortie;
+
 
 }
 

@@ -1,5 +1,8 @@
 package com.example.demo.entities;
-import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.*;
 
 import lombok.Data;
@@ -11,7 +14,7 @@ import lombok.AllArgsConstructor;
 @DiscriminatorColumn(name = "role",length = 15,discriminatorType = DiscriminatorType.STRING)
 @Table(name = "utilisateurs")
 @Data @AllArgsConstructor @NoArgsConstructor
-public class utilisateur {
+public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
@@ -20,8 +23,13 @@ public class utilisateur {
     private String mdp;
     private String email;
     private String token;
+    private String roles;
 
     public void SetName(String name) {
         this.nom_us = name;
     }
+
+    @OneToMany(mappedBy = "utilis", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Demande> demandes;
 }
+

@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.entities.utilisateur;
+import com.example.demo.entities.Utilisateur;
 import com.example.demo.repositorie.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,15 +17,15 @@ public class Demo1Application {
 
     }
     @Bean
-   CommandLineRunner start(utilisateurRepository utilisateurRepository,
-                           composantsRepository composantsRepository,
-                           demandeRepository demandeRepository,
-                           enginsRepository enginsRepository,
-                          familleRepository familleRepository
+   CommandLineRunner start(UtilisateurRepository utilisateurRepository,
+                           ComposantsRepository composantsRepository,
+                           DemandeRepository demandeRepository,
+                           EnginsRepository enginsRepository,
+                           FamilleRepository familleRepository
                            ){
         return  args -> {
             Stream.of("wijdane","hajr","chaimae").forEach(name_us->{
-                utilisateur utilisateur=new utilisateur();
+                Utilisateur utilisateur=new Utilisateur();
                 utilisateur.SetName(name_us );
                 utilisateurRepository.save(utilisateur);
 
